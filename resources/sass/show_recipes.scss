@@ -1,0 +1,20 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.description {
+  margin-bottom: 20px;
+}
+
+.div_border_bottom {
+  border-bottom: 1px gray solid;
+  padding: 10px;
+}

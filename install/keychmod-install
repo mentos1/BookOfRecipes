@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Set container as directory owner
+chown -R alex:www-data ./
+chown -R alex:www-data laradock/logs
+chown -R alex:www-data vendor
+chown -R alex:www-data storage
+chown -R alex:www-data public
+
+# Set writable directories
+chmod -R 777 storage
+chmod -R 777 resources/lang
+chmod -R 777 public/doc
+chmod -R 777 public/news_images
+
+chmod -R 777 bootstrap/cache

@@ -13,6 +13,7 @@ class Recipe extends Model
         'description',
     ];
 
+
     public function ingredients()
     {
         return $this->belongsToMany(Ingredient::class)

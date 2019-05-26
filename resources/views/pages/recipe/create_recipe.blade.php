@@ -5,10 +5,10 @@
 @endsection
 
 @section('main_block')
-    <create-recipes
+    <create-recipe
             ingredients={{ $ingredients }}
             store_recipe_action="{{ route('recipes.store') }}"
-    ></create-recipes>
+    ></create-recipe>
 
 
     <!-- Modal -->

@@ -40,7 +40,7 @@
                                         <div>
                                             <select class="custom-select" v-model="item.selected" disabled>
                                                 <option :key="ingredient.id"
-                                                        v-for="ingredient in ingredients"
+                                                        v-for="ingredient in form.ingredients"
                                                         v-bind:value="ingredient.id"
                                                 >{{ ingredient.name }}
                                                 </option>
@@ -71,7 +71,7 @@
                                             <section v-else>
                                                 <select class="custom-select" v-model="item.selected">
                                                     <option :key="ingredient.id"
-                                                            v-for="ingredient in ingredients"
+                                                            v-for="ingredient in form.ingredients"
                                                             v-bind:value="ingredient.id"
                                                     >{{ ingredient.name }}
                                                     </option>
@@ -95,7 +95,7 @@
                         <div class="row control_buttons">
                             <div class="col-sm-3">
                                 <button type="button" v-on:click="add"
-                                        v-bind:disabled="ingredient_list.length >= ingredients.length">Добавить
+                                        v-bind:disabled="ingredient_list.length >= form.ingredients.length">Добавить
                                 </button>
                             </div>
                             <div class="col-sm-8 offset-md-1 row">
@@ -112,6 +112,17 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="alert alert-success" v-if='show_alert_success'>
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>Success! </strong>
+            Рецепт успешно обновлен.
+        </div>
+
+        <div class="alert alert-error" v-if='show_alert_error'>
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>Success! </strong>
+            Ошибка обновления.
         </div>
     </div>
 
@@ -133,6 +144,12 @@
                 error_name: false,
                 description: '',
                 error_description: false,
+                show_alert_success: false,
+                show_alert_error: false,
+                form : {
+                    ingredients : {},
+                    recipe : {},
+                }
 
             }
 
@@ -148,7 +165,7 @@
                     this.error_last_ingredient = false;
                 }
 
-                if (this.ingredient_list.length < this.ingredients.length) {
+                if (this.ingredient_list.length < this.form.ingredients.length) {
                     this.ingredient_list = [...this.ingredient_list, {
                         selected: null,
                         amount: ''
@@ -168,7 +185,7 @@
                 let list = [...this.ingredient_list];
                 list.pop();
                 let id_busy_ingredients = list.map((item) => item.selected);
-                this.ingredient_filtered = this.ingredients.filter((item) => {
+                this.ingredient_filtered = this.form.ingredients.filter((item) => {
                     return !(id_busy_ingredients.indexOf(item.id) + 1)
                 });
             },
@@ -191,11 +208,17 @@
                     name: this.name,
                     description: this.description,
                     ingredient_list: this.ingredient_list,
-                }).then(function (response) {
+                }).then((response) => {
                     if (response.status === 200 && response.data.status === 'ok') {
-                        window.location.href = '/home'
+                        this.show_alert_success = true;
+                        setTimeout(() => this.show_alert_success = false, 1000 * 3);
+                    } else {
+                        this.show_alert_error = true;
+                        setTimeout(() => this.show_alert_error = false, 1000 * 3);
                     }
-                }).catch(function (error) {
+                }).catch((error) => {
+                    this.show_alert_error = true;
+                    setTimeout(() => this.show_alert_error = false, 1000 * 3);
                     console.error(error);
                 });
 
@@ -208,9 +231,7 @@
                 recipe = JSON.parse(this.recipe),
                 recipe_ingredients = JSON.parse(this.recipe_ingredients);
 
-            this.ingredients = JSON.parse(this.ingredients);
-            this.recipe = JSON.parse(this.recipe);
-            this.recipe_ingredients = JSON.parse(this.recipe_ingredients);
+            this.form.ingredients = ingredients;
 
             this.name = recipe.name;
             this.description = recipe.description;
@@ -220,9 +241,16 @@
                 return {selected: item.id, amount: item.pivot.amount}
             });
 
+            if (!this.ingredient_list.length) {
+                this.ingredient_list = [{
+                    selected: 0,
+                    amount: ''
+                }]
+            }
 
             this.filter_items();
 
         }
     }
 </script>
+

@@ -7,8 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import CreateRecipes from './components/CreateRecipes'
+/*import CreateRecipes from './components/CreateRecipes'
 import UpdateRecipes from './components/UpdateRecipes'
+import ShowRecipe from './components/ShowRecipe'*/
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,9 +22,10 @@ import UpdateRecipes from './components/UpdateRecipes'
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('update-recipes-component', require('./components/UpdateRecipes.vue'));
-Vue.component('create-recipes-component', require('./components/CreateRecipes.vue'));
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('update-recipes', require('./components/UpdateRecipes.vue').default);
+Vue.component('create-recipe', require('./components/CreateRecipes.vue').default);
+Vue.component('show-recipe', require('./components/ShowRecipe.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,7 +33,8 @@ Vue.component('create-recipes-component', require('./components/CreateRecipes.vu
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 const app = new Vue({
     el: '#app',
-    components: { CreateRecipes, UpdateRecipes }
+    /*components: { CreateRecipes, UpdateRecipes, ShowRecipe }*/
 });

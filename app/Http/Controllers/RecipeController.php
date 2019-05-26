@@ -82,7 +82,8 @@ class RecipeController extends Controller
     public function edit(Recipe $recipe)
     {
         $ingredients = Ingredient::select('id', 'name')->get();
-        $recipe = $recipe->get(['id', 'name', 'description'])->first();
+        $recipe = $recipe->where('id', $recipe->id)->get(['id', 'name', 'description'])->first();
+
         return view('pages.recipe.edit_recipe' , compact('recipe', 'ingredients'));
     }
 

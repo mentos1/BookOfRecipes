@@ -2,7 +2,12 @@
 
 
 @section('main_block')
-    <div class="container">
+    <show-recipe
+            store_recipe_action = "{{ route('recipes.update', $recipe->id)  }}"
+            recipe ='{{ $recipe }}'
+            recipe_ingredients ='{{ $recipe->ingredients }}'
+    ></show-recipe>
+{{--    <div class="container">
         <div class="card-body">
             <div class="content">
                 <div class="d-flex justify-content-between">
@@ -15,10 +20,10 @@
                 @foreach($recipe->ingredients as $ingredient)
                     <div class="d-flex justify-content-between div_border_bottom">
                         <div>{{$ingredient->name}}</div>
-                        <div>{{$ingredient->pivot->amount}}</div>
+                        <div><input value="{{$ingredient->pivot->amount}}" onblur="console.log(this.value)"></div>
                     </div>
                 @endforeach
 
             </div>
-        </div>
+        </div>--}}
 @endsection

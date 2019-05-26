@@ -37901,7 +37901,11 @@ var staticRenderFns = [
         "button",
         {
           staticClass: "col-sm-8",
-          attrs: { "data-toggle": "modal", "data-target": "#exampleModal" }
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModal"
+          }
         },
         [
           _vm._v(
@@ -38407,7 +38411,11 @@ var staticRenderFns = [
         "button",
         {
           staticClass: "col-sm-8",
-          attrs: { "data-toggle": "modal", "data-target": "#exampleModal" }
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModal"
+          }
         },
         [
           _vm._v(

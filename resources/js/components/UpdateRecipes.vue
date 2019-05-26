@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-sm-8 offset-md-1 row">
                                 <label class="col-sm-4">Нет в списке?</label>
-                                <button class="col-sm-8" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="col-sm-8" data-toggle="modal" data-target="#exampleModal">
                                     Создать новый ингредиент
                                 </button>
                             </div>
